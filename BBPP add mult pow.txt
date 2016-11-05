@@ -1,0 +1,85 @@
+// FUNCTIONS //
+
+// add function adds arg1 and arg2, stores answer in return //
+set add pc;
+while call not 0 do;
+	set add_call call;
+	set add_a arg1;
+	set add_b arg2;
+	set add_return add_a;
+	while add_b not 0 do;
+		incr add_return;
+		decr add_b;
+	end;
+	set return add_return;
+	incr add_call;
+	abandon;
+	set pc add_call;
+end;
+
+// multiply function multiplies arg1 and arg2, stores answer in return //
+set multiply pc;
+while call not 0 do;
+	set mult_call call;
+	set mult_a arg1;
+	set mult_b arg2;
+	clear mult_return;
+	while mult_a not 0 do;
+		set arg1 mult_return;
+		set arg2 mult_b;
+		set call pc;
+		set pc add;
+		set mult_return return;
+		decr mult_a;
+	end;
+	set return mult_return;
+	incr mult_call;
+	abandon;
+	set pc mult_call;
+end;
+
+// power function returns arg1 to the power of arg2 //
+set power pc;
+while call not 0 do;
+	set pow_call call;
+	set pow_a arg1;
+	set pow_b arg2;
+	clear pow_return;
+	incr pow_return;
+	while pow_b not 0 do;
+		set arg1 pow_return;
+		set arg2 pow_a;
+		set call pc;
+		set pc multiply;
+		set pow_return return;
+		decr pow_b;
+	end;
+	set return pow_return;
+	incr pow_call;
+	abandon;
+	set pc pow_call;
+end;
+
+// BODY //
+// This is where the main program goes //
+
+set a 3;
+set b 5;
+
+set arg1 a;
+set arg2 b;
+set call pc;
+set pc add;
+set SUM return;
+
+set arg1 a;
+set arg2 b;
+set call pc;
+set pc multiply;
+set PRODUCT return;
+
+set arg1 a;
+set arg2 b;
+set call pc;
+set pc power;
+set POWER return;
